@@ -10,6 +10,14 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
 
+// Add this above the register function to help TypeScript recognize process.env variables
+declare const process: {
+  env: {
+    NODE_ENV: string;
+    PUBLIC_URL: string;
+  };
+};
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.

@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
 
+// Add this above the App function to help TypeScript recognize process.env variables
+declare const process: {
+  env: {
+    REACT_APP_API_URL: string;
+  };
+};
+
 function App() {
   const [apiKey, setApiKey] = useState('');
   const [item, setItem] = useState('');
@@ -16,7 +23,8 @@ function App() {
     setCost(null);
     setCitation('');
     try {
-      const response = await fetch('/api/get-cost', {
+      const apiUrl = process.env.REACT_APP_API_URL;
+      const response = await fetch(`${apiUrl}/api/get-cost`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
