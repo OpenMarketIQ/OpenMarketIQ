@@ -1,7 +1,6 @@
 import os
 import requests
 import json
-import re
 
 # Prompt user for the API key
 API_KEY = input("Enter your Perplexity API key: ").strip()
@@ -19,10 +18,23 @@ headers = {
     "Content-Type": "application/json"
 }
 data = {
-    "model": "pplx-70b-online",
+    "model": "sonar",
     "messages": [
-        {"role": "user", "content": f"What is the cost of {item}? Reply with only the cost and the citation link."}
-    ]
+        {"role": "user", "content": f"What is the cost of {item}? Reply ONLY in JSON with two fields: cost (number, no currency symbol, no range, just a single number) and citation (string, the URL). Example: {{\"cost\": 35, \"citation\": \"https://example.com\"}}"}
+    ],
+    "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "cost": {"type": "number"},
+                    "citation": {"type": "string"}
+                },
+                "required": ["cost", "citation"]
+            }
+        }
+    }
 }
 
 # Send the request
@@ -35,18 +47,13 @@ if response.status_code == 200:
     result = response.json()
     try:
         answer = result["choices"][0]["message"]["content"]
-        # Try to extract a cost (e.g., $123.45 or 123 USD)
-        cost_match = re.search(r'(\$\s?\d+[\d,.]*)|(\d+[\d,.]*\s?(USD|usd|dollars|Dollars))', answer)
-        if cost_match:
-            cost = cost_match.group(0).strip()
-        # Try to extract a citation link (http/https URL)
-        citation_match = re.search(r'(https?://\S+)', answer)
-        if citation_match:
-            citation = citation_match.group(0)
-    except (KeyError, IndexError):
+        answer_json = json.loads(answer)
+        cost = answer_json.get("cost")
+        citation = answer_json.get("citation")
+    except (KeyError, IndexError, json.JSONDecodeError):
         pass
 else:
     print(json.dumps({"cost": None, "citation": None}))
     exit(1)
 
-print(json.dumps({"cost": cost, "citation": citation})) 
+print(json.dumps({"cost": cost, "citation": citation}))
