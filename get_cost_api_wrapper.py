@@ -23,7 +23,6 @@ def main():
             print(line.strip(), flush=True)
             return
     print('{"cost": null, "citation": null}', flush=True)
-    sys.exit(1)
 
 if __name__ == "__main__":
     main() 

@@ -41,7 +41,7 @@ async def get_cost(req: CostRequest):
             timeout=30
         )
         if process.returncode != 0:
-            return JSONResponse(status_code=500, content={"error": "Failed to get cost", "details": process.stderr})
+            return JSONResponse(status_code=500, content={"error": "Failed to get cost", "details": process.stderr, "stdout": process.stdout})
         try:
             data = json.loads(process.stdout)
             return data

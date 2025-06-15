@@ -1,15 +1,15 @@
 import os
 import requests
 import json
+import sys
 
-# Prompt user for the API key
-API_KEY = input("Enter your Perplexity API key: ").strip()
-if not API_KEY:
-    print("Error: API key is required.")
-    exit(1)
+# Read API key and item from environment variables
+API_KEY = os.environ.get("PERPLEXITY_API_KEY")
+item = os.environ.get("PERPLEXITY_ITEM")
 
-# Prompt user for the item
-item = input("Enter the item you want to know the cost of: ")
+if not API_KEY or not item:
+    print(json.dumps({"cost": None, "citation": None}))
+    sys.exit(1)
 
 # Prepare the API request
 url = "https://api.perplexity.ai/chat/completions"
@@ -37,15 +37,22 @@ data = {
     }
 }
 
+print(f"DEBUG: Using API_KEY={API_KEY[:6]}... and item={item}", file=sys.stderr)
+
 # Send the request
-response = requests.post(url, headers=headers, json=data)
+try:
+    response = requests.post(url, headers=headers, json=data)
+    print(f"DEBUG: Perplexity API status={response.status_code}, response={response.text}", file=sys.stderr)
+except Exception as e:
+    print(json.dumps({"cost": None, "citation": None, "error": str(e)}))
+    sys.exit(1)
 
 cost = None
 citation = None
 
 if response.status_code == 200:
-    result = response.json()
     try:
+        result = response.json()
         answer = result["choices"][0]["message"]["content"]
         answer_json = json.loads(answer)
         cost = answer_json.get("cost")
@@ -53,7 +60,21 @@ if response.status_code == 200:
     except (KeyError, IndexError, json.JSONDecodeError):
         pass
 else:
-    print(json.dumps({"cost": None, "citation": None}))
-    exit(1)
+    try:
+        print(json.dumps({"cost": None, "citation": None, "error": response.text}))
+    except BrokenPipeError:
+        try:
+            sys.stderr.close()
+        except Exception:
+            pass
+        sys.exit(0)
+    sys.exit(1)
 
-print(json.dumps({"cost": cost, "citation": citation}))
+try:
+    print(json.dumps({"cost": cost, "citation": citation}))
+except BrokenPipeError:
+    try:
+        sys.stderr.close()
+    except Exception:
+        pass
+    sys.exit(0)

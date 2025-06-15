@@ -1,0 +1,48 @@
+{
+          // Use IntelliSense to learn about possible attributes.
+          // Hover to view descriptions of existing attributes.
+          // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+          "version": "0.2.0",
+          "configurations": [
+          {"name":"Python Debugger: FastAPI","type":"debugpy","request":"launch","module":"uvicorn","args":["main:app","--reload"],"jinja":true},
+                    {
+                              "name": "Python Debugger: Current File",
+                              "type": "debugpy",
+                              "request": "launch",
+                              "program": "${file}",
+                              "console": "integratedTerminal"
+                    },
+                    {
+                              "name": "FastAPI Backend (Uvicorn)",
+                              "type": "debugpy",
+                              "request": "launch",
+                              "module": "uvicorn",
+                              "args": [
+                                        "get_cost_api:app",
+                                        "--reload"
+                              ],
+                              "cwd": "${workspaceFolder}",
+                              "console": "integratedTerminal"
+                    },
+                    {
+                              "name": "React Frontend",
+                              "type": "pwa-node",
+                              "request": "launch",
+                              "cwd": "${workspaceFolder}/get-cost-frontend",
+                              "runtimeExecutable": "npm",
+                              "runtimeArgs": [
+                                        "start"
+                              ],
+                              "console": "integratedTerminal"
+                    }
+          ],
+          "compounds": [
+                    {
+                              "name": "Full Stack: React + FastAPI",
+                              "configurations": [
+                                        "FastAPI Backend (Uvicorn)",
+                                        "React Frontend"
+                              ]
+                    }
+          ]
+}

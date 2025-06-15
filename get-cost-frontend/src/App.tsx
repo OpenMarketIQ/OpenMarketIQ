@@ -16,7 +16,6 @@ function App() {
     setCost(null);
     setCitation('');
     try {
-      // TODO: Replace with actual backend endpoint
       const response = await fetch('/api/get-cost', {
         method: 'POST',
         headers: {
@@ -24,7 +23,16 @@ function App() {
         },
         body: JSON.stringify({ apiKey, item }),
       });
-      if (!response.ok) throw new Error('Failed to fetch cost');
+      if (!response.ok) {
+        let msg = 'Failed to fetch cost';
+        try {
+          const errData = await response.json();
+          msg += errData.error ? `: ${errData.error}` : '';
+          msg += errData.details ? `\nDetails: ${errData.details}` : '';
+          msg += errData.stdout ? `\nOutput: ${errData.stdout}` : '';
+        } catch {}
+        throw new Error(msg);
+      }
       const data = await response.json();
       setCost(data.cost);
       setCitation(data.citation);
