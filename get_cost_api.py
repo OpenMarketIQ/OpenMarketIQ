@@ -13,8 +13,13 @@ app = FastAPI()
 # Allow CORS for local frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://openmarketiq-frontend.onrender.com"],
-    allow_credentials=True,
+    allow_origins=[
+        "*",
+        "http://localhost:3000",
+        "https://openmarketiq-frontend.onrender.com",
+        "https://www.openmarketiq.org"
+    ],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
