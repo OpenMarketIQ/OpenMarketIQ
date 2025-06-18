@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-import { ReactComponent as Logo } from './logo.svg';
-
-// Add this above the App function to help TypeScript recognize process.env variables
-declare const process: {
-  env: {
-    REACT_APP_API_URL: string;
-  };
-};
 
 function App() {
   const [apiKey, setApiKey] = useState('');
@@ -56,7 +48,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="omiq-card">
-          <Logo className="omiq-logo" aria-label="OpenMarketIQ Logo" />
+          <img src={'/OpenMarketIQ.png'} className="omiq-logo" alt="OpenMarketIQ Logo" />
           <h2 className="omiq-title">Get Item Cost <span className="omiq-sub">(Perplexity API)</span></h2>
           <form onSubmit={handleSubmit} className="omiq-form">
             <input
