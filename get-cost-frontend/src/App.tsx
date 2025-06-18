@@ -1,6 +1,24 @@
 import React, { useState } from 'react';
 import './App.css';
 
+const DOCS_URL = 'https://openmarketiq.github.io/';
+
+const codeExamples = {
+  typescript: `fetch('https://api.openmarketiq.org/api/get-cost', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    apiKey: 'YOUR_PERPLEXITY_API_KEY',
+    item: 'ITEM_NAME'
+  }),
+})
+  .then(res => res.json())
+  .then(data => console.log(data));`,
+  python: `import requests\n\nurl = 'https://api.openmarketiq.org/api/get-cost'\npayload = {\n    'apiKey': 'YOUR_PERPLEXITY_API_KEY',\n    'item': 'ITEM_NAME'\n}\nheaders = {'Content-Type': 'application/json'}\n\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.json())`
+};
+
 function App() {
   const [apiKey, setApiKey] = useState('');
   const [item, setItem] = useState('');
@@ -8,6 +26,8 @@ function App() {
   const [citation, setCitation] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [lang, setLang] = useState<'typescript' | 'python'>('typescript');
+  const [copied, setCopied] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,9 +36,6 @@ function App() {
     setCost(null);
     setCitation('');
     try {
-      // Only support CRA for env variables (no Vite)
-      // const apiUrl = process.env.REACT_APP_API_URL;
-      // if (!apiUrl) throw new Error('API URL is not set in environment variables.');
       const response = await fetch('https://api.openmarketiq.org/api/get-cost', {
         method: 'POST',
         headers: {
@@ -46,57 +63,75 @@ function App() {
     }
   };
 
+  // Replace placeholders in code examples
+  const code = codeExamples[lang]
+    .replace('YOUR_PERPLEXITY_API_KEY', apiKey || 'YOUR_PERPLEXITY_API_KEY')
+    .replace('ITEM_NAME', item || 'ITEM_NAME');
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1200);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <div className="omiq-card">
-          <img src={'/OpenMarketIQ Transparent.png'} className="omiq-logo" alt="OpenMarketIQ Logo" />
-          <h2 className="omiq-title">Get Item Cost <span className="omiq-sub">(Perplexity API)</span></h2>
-          <form onSubmit={handleSubmit} className="omiq-form">
-            <input
-              type="text"
-              placeholder="Enter Perplexity API Key"
-              value={apiKey}
-              onChange={e => setApiKey(e.target.value)}
-              required
-              className="omiq-input"
-            />
-            <input
-              type="text"
-              placeholder="Enter item name"
-              value={item}
-              onChange={e => setItem(e.target.value)}
-              required
-              className="omiq-input"
-            />
-            <button type="submit" disabled={loading} className="omiq-btn">
-              {loading ? 'Loading...' : 'Get Cost'}
-            </button>
-          </form>
-          {error && <div className="omiq-alert omiq-alert-error">{error}</div>}
-          {cost !== null && (
-            <div className="omiq-result-card">
-              <div><strong>Cost:</strong> {cost}</div>
-              <div><strong>Citation:</strong> <a href={citation} target="_blank" rel="noopener noreferrer">{citation}</a></div>
+        <div className="omiq-flex-card">
+          <div className="omiq-card omiq-card-main">
+            <img src={'/OpenMarketIQ Transparent.png'} className="omiq-logo" alt="OpenMarketIQ Logo" />
+            <h2 className="omiq-title">Get Item Cost <span className="omiq-sub">(Perplexity API)</span></h2>
+            <form onSubmit={handleSubmit} className="omiq-form">
+              <input
+                type="text"
+                placeholder="Enter Perplexity API Key"
+                value={apiKey}
+                onChange={e => setApiKey(e.target.value)}
+                required
+                className="omiq-input"
+              />
+              <input
+                type="text"
+                placeholder="Enter item name"
+                value={item}
+                onChange={e => setItem(e.target.value)}
+                required
+                className="omiq-input"
+              />
+              <button type="submit" disabled={loading} className="omiq-btn">
+                {loading ? 'Loading...' : 'Get Cost'}
+              </button>
+            </form>
+            {error && <div className="omiq-alert omiq-alert-error">{error}</div>}
+            {cost !== null && (
+              <div className="omiq-result-card">
+                <div><strong>Cost:</strong> {cost}</div>
+                <div><strong>Citation:</strong> <a href={citation} target="_blank" rel="noopener noreferrer">{citation}</a></div>
+              </div>
+            )}
+          </div>
+          <div className="omiq-card omiq-card-snippet">
+            <div className="omiq-snippet-header">
+              <h3 className="omiq-snippet-title">API Example</h3>
+              <div className="omiq-snippet-toggle">
+                <button
+                  className={lang === 'typescript' ? 'omiq-toggle-btn active' : 'omiq-toggle-btn'}
+                  onClick={() => setLang('typescript')}
+                  type="button"
+                >TypeScript</button>
+                <button
+                  className={lang === 'python' ? 'omiq-toggle-btn active' : 'omiq-toggle-btn'}
+                  onClick={() => setLang('python')}
+                  type="button"
+                >Python</button>
+              </div>
+              <a className="omiq-docs-link" href={DOCS_URL} target="_blank" rel="noopener noreferrer">View Docs</a>
+              <button className="omiq-copy-btn" onClick={handleCopy} type="button">
+                {copied ? 'Copied!' : 'Copy code'}
+              </button>
             </div>
-          )}
-          {/* API Usage Snippet */}
-          <div style={{ marginTop: '2rem', width: '100%', textAlign: 'left' }}>
-            <h3 style={{ fontWeight: 500, fontSize: '1.1rem', marginBottom: '0.5rem' }}>API Example</h3>
-            <pre style={{ background: '#222', color: '#fff', padding: '1rem', borderRadius: '8px', overflowX: 'auto', fontSize: '0.95rem' }}>
-              <code>{`fetch('https://api.openmarketiq.org/api/get-cost', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    apiKey: '${apiKey || 'YOUR_PERPLEXITY_API_KEY'}',
-    item: '${item || 'ITEM_NAME'}'
-  }),
-})
-  .then(res => res.json())
-  .then(data => console.log(data));`}
-              </code>
+            <pre className="omiq-snippet-pre">
+              <code>{code}</code>
             </pre>
           </div>
         </div>
