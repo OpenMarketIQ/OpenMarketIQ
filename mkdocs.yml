@@ -1,5 +1,5 @@
 site_name: OpenMarketIQ Python API
-site_url: https://yourdomain.com
+site_url: https://www.openmarketiq.org
 nav:
   - Home: index.md
   - Usage: usage.md
