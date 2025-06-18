@@ -1,0 +1,11 @@
+site_name: OpenMarketIQ Python API
+site_url: https://yourdomain.com
+nav:
+  - Home: index.md
+  - Usage: usage.md
+theme:
+  name: material
+  logo: assets/OpenMarketIQ Logo small.png
+  favicon: assets/OpenMarketIQ favicon-32x32.png
+repo_url: https://github.com/yourusername/openmarketiq
+repo_name: openmarketiq 

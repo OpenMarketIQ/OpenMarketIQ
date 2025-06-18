@@ -1,3 +1,48 @@
+# OpenMarketIQ Python API
+
+A simple Python client for fetching item cost and citation using the Perplexity API, inspired by the OpenAI API style.
+
+## Installation
+
+```bash
+pip install openmarketiq
+```
+
+Or, for local development:
+
+```bash
+pip install .
+```
+
+## Usage
+
+```python
+from openmarketiq.api import get_cost
+
+result = get_cost("car", api_key="YOUR_PERPLEXITY_API_KEY")
+print(result)
+# Example output: {'cost': 48699, 'citation': 'https://careedge.com/guides/new-car-price-trends-in-2025'}
+```
+
+## API Reference
+
+### `get_cost(item: str, api_key: str) -> dict`
+
+Fetches the cost and citation for an item using the Perplexity API.
+
+- `item` (str): The item to get the cost for (e.g., 'car').
+- `api_key` (str): Your Perplexity API key.
+
+Returns a dict with keys:
+- `cost` (number or None)
+- `citation` (str or None)
+- `error` (str, optional)
+
+## License
+
+MIT
+
+---
 
 # OpenMarketIQ
 
@@ -64,7 +109,7 @@ This will:
 ## 🌍 Domain Setup
 
 - Add custom domains (e.g., `openmarketiq.org`, `api.openmarketiq.org`) through Render's domain settings.
-- Update DNS settings as per Render’s instructions.
+- Update DNS settings as per Render's instructions.
 - SSL is automatically managed by Render.
 
 ---
