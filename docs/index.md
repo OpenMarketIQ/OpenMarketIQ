@@ -2,7 +2,7 @@
 
 # OpenMarketIQ Python API
 
-![OpenMarketIQ Logo](OpenMarketIQ_Logo_small.png)
+![OpenMarketIQ Logo](OpenMarketIQ_small_favicon-32x32.png)
 
 A beautiful, developer-friendly Python client for fetching item cost and citation using the Perplexity API. Inspired by the OpenAI API experience.
 
