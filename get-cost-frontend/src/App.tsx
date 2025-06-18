@@ -17,9 +17,9 @@ function App() {
     setCitation('');
     try {
       // Only support CRA for env variables (no Vite)
-      const apiUrl = process.env.REACT_APP_API_URL;
-      if (!apiUrl) throw new Error('API URL is not set in environment variables.');
-      const response = await fetch(`${apiUrl}/api/get-cost`, {
+      // const apiUrl = process.env.REACT_APP_API_URL;
+      // if (!apiUrl) throw new Error('API URL is not set in environment variables.');
+      const response = await fetch('https://api.openmarketiq.org/api/get-cost', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,6 +80,25 @@ function App() {
               <div><strong>Citation:</strong> <a href={citation} target="_blank" rel="noopener noreferrer">{citation}</a></div>
             </div>
           )}
+          {/* API Usage Snippet */}
+          <div style={{ marginTop: '2rem', width: '100%', textAlign: 'left' }}>
+            <h3 style={{ fontWeight: 500, fontSize: '1.1rem', marginBottom: '0.5rem' }}>API Example</h3>
+            <pre style={{ background: '#222', color: '#fff', padding: '1rem', borderRadius: '8px', overflowX: 'auto', fontSize: '0.95rem' }}>
+              <code>{`fetch('https://api.openmarketiq.org/api/get-cost', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    apiKey: '${apiKey || 'YOUR_PERPLEXITY_API_KEY'}',
+    item: '${item || 'ITEM_NAME'}'
+  }),
+})
+  .then(res => res.json())
+  .then(data => console.log(data));`}
+              </code>
+            </pre>
+          </div>
         </div>
       </header>
     </div>
