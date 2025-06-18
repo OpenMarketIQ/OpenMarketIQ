@@ -50,7 +50,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="omiq-card">
-          <img src={'/OpenMarketIQ.png'} className="omiq-logo" alt="OpenMarketIQ Logo" />
+          <img src={'/OpenMarketIQ Transparent.png'} className="omiq-logo" alt="OpenMarketIQ Logo" />
           <h2 className="omiq-title">Get Item Cost <span className="omiq-sub">(Perplexity API)</span></h2>
           <form onSubmit={handleSubmit} className="omiq-form">
             <input
