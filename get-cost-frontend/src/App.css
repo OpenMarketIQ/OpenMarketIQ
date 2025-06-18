@@ -14,14 +14,14 @@
 }
 
 .App-header {
-  background: linear-gradient(135deg, #f8fbff 0%, #eaf3fa 100%);
+  background: linear-gradient(135deg, #f4f8fb 0%, #eaf3fa 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #23272f;
+  color: #222b45;
 }
 
 .App-link {
@@ -41,14 +41,14 @@
   background: #fff;
   padding: 2.5rem 2rem 2rem 2rem;
   border-radius: 18px;
-  box-shadow: 0 4px 32px 0 rgba(97,218,251,0.10), 0 1.5px 0 0 #61dafb;
+  box-shadow: 0 4px 32px 0 rgba(33,118,210,0.08), 0 1.5px 0 0 #2176d2;
   min-width: 340px;
   max-width: 95vw;
   width: 370px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #61dafb;
+  border: 2px solid #2176d2;
 }
 .omiq-logo {
   width: 70px;
@@ -59,11 +59,12 @@
   font-weight: 700;
   margin-bottom: 0.5rem;
   letter-spacing: -1px;
+  color: #222b45;
 }
 .omiq-sub {
   font-size: 1rem;
   font-weight: 400;
-  color: #61dafb;
+  color: #2176d2;
 }
 .omiq-form {
   display: flex;
@@ -75,20 +76,20 @@
 .omiq-input {
   padding: 0.7rem 1rem;
   border-radius: 8px;
-  border: 1.5px solid #bcdffb;
-  background: #f4faff;
-  color: #23272f;
+  border: 1.5px solid #c7d8ee;
+  background: #f4f8fb;
+  color: #222b45;
   font-size: 1rem;
   outline: none;
   transition: border 0.2s, box-shadow 0.2s;
 }
 .omiq-input:focus {
-  border: 1.5px solid #61dafb;
-  box-shadow: 0 0 0 2px #61dafb44;
+  border: 1.5px solid #2176d2;
+  box-shadow: 0 0 0 2px #2176d244;
 }
 .omiq-btn {
-  background: #61dafb;
-  color: #23272f;
+  background: #2176d2;
+  color: #fff;
   border: none;
   border-radius: 8px;
   padding: 0.8rem 0;
@@ -96,15 +97,15 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
-  box-shadow: 0 2px 8px 0 #22304233;
+  box-shadow: 0 2px 8px 0 #2176d233;
 }
 .omiq-btn:disabled {
-  background: #3a8fa7;
-  color: #b2eaff;
+  background: #aac8ec;
+  color: #e0eaf6;
   cursor: not-allowed;
 }
 .omiq-btn:not(:disabled):hover {
-  background: #22b6e6;
+  background: #1251a3;
   color: #fff;
 }
 .omiq-alert {
@@ -122,18 +123,18 @@
 }
 .omiq-result-card {
   margin-top: 1.5rem;
-  background: #f4faff;
+  background: #f4f8fb;
   border-radius: 10px;
   padding: 1.1rem 1.2rem;
-  color: #23272f;
+  color: #222b45;
   width: 100%;
   text-align: left;
-  box-shadow: 0 2px 12px 0 #61dafb22;
+  box-shadow: 0 2px 12px 0 #2176d222;
   font-size: 1.08rem;
-  border: 1.5px solid #bcdffb;
+  border: 1.5px solid #c7d8ee;
 }
 .omiq-result-card a {
-  color: #61dafb;
+  color: #2176d2;
   text-decoration: none;
   word-break: break-all;
   transition: text-decoration 0.2s;
