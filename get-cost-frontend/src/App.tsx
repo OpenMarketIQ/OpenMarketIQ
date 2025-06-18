@@ -16,8 +16,8 @@ function App() {
     setCost(null);
     setCitation('');
     try {
-      // Support both Vite and CRA for env variables (no process.env)
-      const apiUrl = (import.meta as any).env?.VITE_REACT_APP_API_URL || (window as any).REACT_APP_API_URL;
+      // Only support CRA for env variables (no Vite)
+      const apiUrl = (window as any).REACT_APP_API_URL;
       if (!apiUrl) throw new Error('API URL is not set in environment variables.');
       const response = await fetch(`${apiUrl}/api/get-cost`, {
         method: 'POST',
