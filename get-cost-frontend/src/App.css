@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: linear-gradient(135deg, #23272f 0%, #223042 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,5 +34,120 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.omiq-card {
+  background: #23272f;
+  padding: 2.5rem 2rem 2rem 2rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(97,218,251,0.10), 0 1.5px 0 0 #61dafb;
+  min-width: 340px;
+  max-width: 95vw;
+  width: 370px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #61dafb;
+}
+.omiq-logo {
+  width: 70px;
+  margin-bottom: 1.2rem;
+}
+.omiq-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+}
+.omiq-sub {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #61dafb;
+}
+.omiq-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1.2rem;
+}
+.omiq-input {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #444b58;
+  background: #1a1d22;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.omiq-input:focus {
+  border: 1.5px solid #61dafb;
+  box-shadow: 0 0 0 2px #61dafb44;
+}
+.omiq-btn {
+  background: #61dafb;
+  color: #23272f;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px 0 #22304233;
+}
+.omiq-btn:disabled {
+  background: #3a8fa7;
+  color: #b2eaff;
+  cursor: not-allowed;
+}
+.omiq-btn:not(:disabled):hover {
+  background: #22b6e6;
+  color: #fff;
+}
+.omiq-alert {
+  margin-top: 1.2rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  text-align: left;
+}
+.omiq-alert-error {
+  background: #ff3b3b22;
+  color: #ff6b6b;
+  border: 1.5px solid #ff6b6b;
+}
+.omiq-result-card {
+  margin-top: 1.5rem;
+  background: #1a1d22;
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem;
+  color: #fff;
+  width: 100%;
+  text-align: left;
+  box-shadow: 0 2px 12px 0 #61dafb22;
+  font-size: 1.08rem;
+  border: 1.5px solid #223042;
+}
+.omiq-result-card a {
+  color: #61dafb;
+  text-decoration: none;
+  word-break: break-all;
+  transition: text-decoration 0.2s;
+}
+.omiq-result-card a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 500px) {
+  .omiq-card {
+    min-width: unset;
+    width: 98vw;
+    padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+  }
+  .omiq-title {
+    font-size: 1.3rem;
   }
 }
