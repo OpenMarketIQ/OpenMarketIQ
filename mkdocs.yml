@@ -5,7 +5,7 @@ nav:
   - Usage: usage.md
 theme:
   name: material
-  logo: assets/OpenMarketIQ Logo small.png
-  favicon: assets/OpenMarketIQ favicon-32x32.png
-repo_url: https://github.com/yourusername/openmarketiq
-repo_name: openmarketiq 
+  logo: OpenMarketIQ_Logo_small.png
+  favicon: ../assets/OpenMarketIQ favicon-32x32.png
+repo_url: https://github.com/OpenMarketIQ/OpenMarketIQ
+repo_name: OpenMarketIQ/OpenMarketIQ 
