@@ -5,18 +5,28 @@ const DOCS_URL = 'https://openmarketiq.github.io/';
 
 const codeExamples = {
   typescript: `fetch('https://api.openmarketiq.org/api/get-cost', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    apiKey: 'YOUR_PERPLEXITY_API_KEY',
-    item: 'ITEM_NAME'
-  }),
-})
-  .then(res => res.json())
-  .then(data => console.log(data));`,
-  python: `import requests\n\nurl = 'https://api.openmarketiq.org/api/get-cost'\npayload = {\n    'apiKey': 'YOUR_PERPLEXITY_API_KEY',\n    'item': 'ITEM_NAME'\n}\nheaders = {'Content-Type': 'application/json'}\n\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.json())`
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      apiKey: 'YOUR_PERPLEXITY_API_KEY',
+      item: 'ITEM_NAME'
+    }),
+  })
+    .then(res => res.json())
+    .then(data => console.log(data));`,
+  python: `import requests
+
+url = 'https://api.openmarketiq.org/api/get-cost'
+payload = {
+    'apiKey': 'YOUR_PERPLEXITY_API_KEY',
+    'item': 'ITEM_NAME'
+}
+headers = {'Content-Type': 'application/json'}
+
+response = requests.post(url, json=payload, headers=headers)
+print(response.json())`
 };
 
 function App() {
@@ -113,22 +123,28 @@ function App() {
           <div className="omiq-card omiq-card-snippet">
             <div className="omiq-snippet-header">
               <h3 className="omiq-snippet-title">API Example</h3>
-              <div className="omiq-snippet-toggle">
-                <button
-                  className={lang === 'typescript' ? 'omiq-toggle-btn active' : 'omiq-toggle-btn'}
-                  onClick={() => setLang('typescript')}
-                  type="button"
-                >TypeScript</button>
-                <button
-                  className={lang === 'python' ? 'omiq-toggle-btn active' : 'omiq-toggle-btn'}
-                  onClick={() => setLang('python')}
-                  type="button"
-                >Python</button>
+              <div className="omiq-snippet-actions">
+                <div className="omiq-snippet-toggle">
+                  <button
+                    className={lang === 'typescript' ? 'omiq-toggle-btn active' : 'omiq-toggle-btn'}
+                    onClick={() => setLang('typescript')}
+                    type="button"
+                  >TypeScript</button>
+                  <button
+                    className={lang === 'python' ? 'omiq-toggle-btn active' : 'omiq-toggle-btn'}
+                    onClick={() => setLang('python')}
+                    type="button"
+                  >Python</button>
+                </div>
+                <a className="omiq-docs-link" href={DOCS_URL} target="_blank" rel="noopener noreferrer">View Docs</a>
+                <button className="omiq-copy-btn" onClick={handleCopy} type="button" title="Copy code" aria-label="Copy code">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{verticalAlign: 'middle'}}>
+                    <rect x="5" y="7" width="9" height="9" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+                    <rect x="7.5" y="4" width="9" height="9" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+                  </svg>
+                  <span className="omiq-copy-btn-text">{copied ? 'Copied!' : ''}</span>
+                </button>
               </div>
-              <a className="omiq-docs-link" href={DOCS_URL} target="_blank" rel="noopener noreferrer">View Docs</a>
-              <button className="omiq-copy-btn" onClick={handleCopy} type="button">
-                {copied ? 'Copied!' : 'Copy code'}
-              </button>
             </div>
             <pre className="omiq-snippet-pre">
               <code>{code}</code>

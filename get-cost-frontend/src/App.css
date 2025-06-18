@@ -182,11 +182,16 @@
 }
 .omiq-snippet-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 0.7rem;
   gap: 0.5rem;
   position: relative;
+}
+.omiq-snippet-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 .omiq-snippet-title {
   font-size: 1.1rem;
@@ -209,6 +214,7 @@
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
   outline: none;
+  margin: 0;
 }
 .omiq-toggle-btn.active, .omiq-toggle-btn:hover {
   background: #2176d2;
@@ -218,38 +224,33 @@
   color: #61dafb;
   font-size: 0.98rem;
   text-decoration: none;
-  margin-left: 0.7rem;
   font-weight: 500;
   transition: color 0.2s;
+  margin: 0 0.2rem;
 }
 .omiq-docs-link:hover {
   color: #fff;
   text-decoration: underline;
-}
-.omiq-snippet-pre {
-  background: transparent;
-  color: #fff;
-  padding: 1rem 0.5rem 0.5rem 0.5rem;
-  border-radius: 8px;
-  overflow-x: auto;
-  font-size: 0.98rem;
-  margin: 0;
-  font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
 }
 .omiq-copy-btn {
   background: #23272f;
   color: #b3c0d1;
   border: none;
   border-radius: 6px;
-  padding: 0.3rem 0.9rem;
-  font-size: 0.98rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  margin-left: 0.7rem;
   transition: background 0.2s, color 0.2s;
   outline: none;
+  min-width: 32px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   z-index: 1;
+  box-shadow: 0 1px 4px 0 #2176d233;
 }
 .omiq-copy-btn:hover, .omiq-copy-btn:focus {
   background: #2176d2;
@@ -258,25 +259,31 @@
 .omiq-copy-btn:active {
   background: #1251a3;
 }
-.omiq-copy-btn {
-  min-width: 90px;
-}
 .omiq-copy-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
-.omiq-copy-btn {
-  box-shadow: 0 1px 4px 0 #2176d233;
+.omiq-copy-btn-text {
+  margin-left: 0.4rem;
+  font-size: 0.98rem;
+  color: #2ecc40;
+  font-weight: 600;
+  transition: opacity 0.2s;
+  opacity: 1;
 }
-.omiq-copy-btn.copied, .omiq-copy-btn[aria-pressed="true"] {
-  background: #2ecc40;
+.omiq-copy-btn-text:empty {
+  display: none;
+}
+.omiq-snippet-pre {
+  background: transparent;
   color: #fff;
-  animation: copied-pop 0.5s;
-}
-@keyframes copied-pop {
-  0% { transform: scale(1); }
-  60% { transform: scale(1.12); }
-  100% { transform: scale(1); }
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 1.02rem;
+  margin: 0;
+  font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+  white-space: pre;
 }
 @media (max-width: 900px) {
   .omiq-flex-card {
