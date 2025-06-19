@@ -68,6 +68,18 @@ function App() {
     .replace('YOUR_PERPLEXITY_API_KEY', apiKey || 'YOUR_PERPLEXITY_API_KEY')
     .replace('ITEM_NAME', item || 'ITEM_NAME');
 
+  // Format code for indentation (for display)
+  function formatCode(code: string) {
+    // Remove leading/trailing whitespace and normalize indentation
+    const lines = code.split('\n');
+    const minIndent = Math.min(
+      ...lines.filter(l => l.trim()).map(l => l.match(/^\s*/)?.[0].length || 0)
+    );
+    return lines.map(l => l.slice(minIndent)).join('\n');
+  }
+
+  const formattedCode = formatCode(code);
+
   const handleCopy = async () => {
     await navigator.clipboard.writeText(code);
     setCopied(true);
@@ -116,7 +128,7 @@ function App() {
             )}
           </div>
           {/* Code Snippet Card */}
-          <div className="flex-1 min-w-[340px] max-w-[400px] w-full bg-[#181c24] text-white border-2 border-text shadow-xl rounded-2xl px-6 py-6 flex flex-col items-stretch">
+          <div className="min-w-[340px] max-w-[400px] w-full bg-[#181c24] text-white border-2 border-text shadow-xl rounded-2xl px-6 py-6 flex flex-col items-stretch">
             <div className="flex items-start justify-between mb-3 gap-2 relative">
               <h3 className="text-lg font-semibold m-0 text-white">API Example</h3>
               <div className="flex items-center gap-2">
@@ -138,12 +150,14 @@ function App() {
                     <rect x="5" y="7" width="9" height="9" rx="2" stroke="currentColor" strokeWidth="1.5"/>
                     <rect x="7.5" y="4" width="9" height="9" rx="2" stroke="currentColor" strokeWidth="1.5"/>
                   </svg>
-                  <span className="ml-2 text-green-500 font-semibold transition-opacity">{copied ? 'Copied!' : ''}</span>
+                  {copied && (
+                    <span className="absolute top-0 right-0 mt-[-10px] mr-[-10px] bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded shadow z-10">Copied!</span>
+                  )}
                 </button>
               </div>
             </div>
             <pre className="bg-transparent text-white px-2 pt-4 pb-2 rounded-lg overflow-x-auto text-base m-0 font-mono whitespace-pre">
-              <code>{code}</code>
+              <code>{formattedCode}</code>
             </pre>
           </div>
         </div>
