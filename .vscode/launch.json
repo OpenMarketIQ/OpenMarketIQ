@@ -29,10 +29,8 @@
                               "type": "node",
                               "request": "launch",
                               "cwd": "${workspaceFolder}/get-cost-frontend",
-                              "runtimeExecutable": "npm",
-                              "runtimeArgs": [
-                                        "start"
-                              ],
+                              "runtimeExecutable": "/bin/zsh",
+                              "runtimeArgs": ["-c", "npm start"],
                               "console": "integratedTerminal"
                     }
           ],

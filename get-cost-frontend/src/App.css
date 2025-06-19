@@ -51,7 +51,7 @@
   border: 2px solid #2176d2;
 }
 .omiq-logo {
-  width: 70px;
+  width: 220px;
   margin-bottom: 1.2rem;
 }
 .omiq-title {
@@ -168,9 +168,10 @@
   max-width: 400px;
 }
 .omiq-card-snippet {
-  flex: 1 1 350px;
-  min-width: 300px;
-  max-width: 420px;
+  flex: 1 1 370px;
+  min-width: 340px;
+  max-width: 400px;
+  width: 370px;
   background: #181c24;
   color: #fff;
   border: 2px solid #222b45;
