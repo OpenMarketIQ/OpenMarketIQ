@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // Removed './App.css';
 
-const DOCS_URL = 'https://openmarketiq.github.io/';
+const DOCS_URL = 'https://openmarketiq.github.io/OpenMarketIQ/';
 
 const codeExamples = {
   typescript: `fetch('https://api.openmarketiq.org/api/get-cost', {
