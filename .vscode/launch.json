@@ -26,7 +26,7 @@
                     },
                     {
                               "name": "React Frontend",
-                              "type": "pwa-node",
+                              "type": "node",
                               "request": "launch",
                               "cwd": "${workspaceFolder}/get-cost-frontend",
                               "runtimeExecutable": "npm",
