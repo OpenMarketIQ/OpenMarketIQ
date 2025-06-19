@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "OpenMarketIQ",
+  "name": "Get Cost of anything with OpenMarketIQ which uses Perplexity API",
   "icons": [
     {
       "src": "favicon.ico",
