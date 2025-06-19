@@ -89,9 +89,9 @@ function App() {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center font-sans">
       <header className="w-full flex flex-col items-center justify-center py-8 px-2 bg-gradient-to-br from-secondary-light to-secondary">
-        <div className="flex flex-col md:flex-row gap-10 md:gap-10 items-start justify-center w-full max-w-5xl">
+        <div className="flex flex-col md:flex-row gap-10 md:gap-10 items-stretch justify-center w-full max-w-5xl min-h-[560px]">
           {/* Main Card */}
-          <div className="bg-card border-2 border-primary shadow-xl rounded-2xl flex flex-col items-center px-8 py-10 min-w-[340px] max-w-[400px] w-full">
+          <div className="bg-card border-2 border-primary shadow-xl rounded-2xl flex flex-col items-center px-8 py-10 w-full flex-1 h-full">
             <img src={'/OpenMarketIQ Transparent.png'} className="w-56 mb-5" alt="OpenMarketIQ Logo" />
             <h2 className="text-3xl font-bold mb-2 tracking-tight text-text">Get Item Cost <span className="text-primary text-lg font-normal">(Perplexity API)</span></h2>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full mt-5">
@@ -128,24 +128,24 @@ function App() {
             )}
           </div>
           {/* Code Snippet Card */}
-          <div className="min-w-[340px] max-w-[400px] w-full bg-[#181c24] text-white border-2 border-text shadow-xl rounded-2xl px-6 py-6 flex flex-col items-stretch">
+          <div className="bg-card border-2 border-primary shadow-xl rounded-2xl px-8 py-10 flex flex-col items-stretch w-full flex-1 h-full">
             <div className="flex items-start justify-between mb-3 gap-2 relative">
-              <h3 className="text-lg font-semibold m-0 text-white">API Example</h3>
+              <h3 className="text-lg font-semibold m-0 text-text">API Example</h3>
               <div className="flex items-center gap-2">
                 <div className="flex gap-1">
                   <button
-                    className={`px-3 py-1 rounded-t-md text-base font-medium transition outline-none ${lang === 'typescript' ? 'bg-primary text-white' : 'bg-[#23272f] text-[#b3c0d1] hover:bg-primary hover:text-white'}`}
+                    className={`px-3 py-1 rounded-t-md text-base font-medium transition outline-none ${lang === 'typescript' ? 'bg-primary text-white' : 'bg-secondary text-secondary-dark hover:bg-primary hover:text-white'}`}
                     onClick={() => setLang('typescript')}
                     type="button"
                   >TypeScript</button>
                   <button
-                    className={`px-3 py-1 rounded-t-md text-base font-medium transition outline-none ${lang === 'python' ? 'bg-primary text-white' : 'bg-[#23272f] text-[#b3c0d1] hover:bg-primary hover:text-white'}`}
+                    className={`px-3 py-1 rounded-t-md text-base font-medium transition outline-none ${lang === 'python' ? 'bg-primary text-white' : 'bg-secondary text-secondary-dark hover:bg-primary hover:text-white'}`}
                     onClick={() => setLang('python')}
                     type="button"
                   >Python</button>
                 </div>
                 <a className="text-accent text-base font-medium hover:underline mx-1" href={DOCS_URL} target="_blank" rel="noopener noreferrer">View Docs</a>
-                <button className="bg-[#23272f] text-[#b3c0d1] rounded-md px-2 py-1 text-base font-medium transition outline-none min-w-[32px] min-h-[32px] flex items-center justify-center relative shadow hover:bg-primary hover:text-white focus:bg-primary focus:text-white disabled:opacity-70 disabled:cursor-not-allowed" onClick={handleCopy} type="button" title="Copy code" aria-label="Copy code">
+                <button className="bg-secondary text-secondary-dark rounded-md px-2 py-1 text-base font-medium transition outline-none min-w-[32px] min-h-[32px] flex items-center justify-center relative shadow hover:bg-primary hover:text-white focus:bg-primary focus:text-white disabled:opacity-70 disabled:cursor-not-allowed" onClick={handleCopy} type="button" title="Copy code" aria-label="Copy code">
                   <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{verticalAlign: 'middle'}}>
                     <rect x="5" y="7" width="9" height="9" rx="2" stroke="currentColor" strokeWidth="1.5"/>
                     <rect x="7.5" y="4" width="9" height="9" rx="2" stroke="currentColor" strokeWidth="1.5"/>
@@ -156,7 +156,7 @@ function App() {
                 </button>
               </div>
             </div>
-            <pre className="bg-transparent text-white px-2 pt-4 pb-2 rounded-lg overflow-x-auto text-base m-0 font-mono whitespace-pre">
+            <pre className="bg-transparent text-text px-2 pt-4 pb-2 rounded-lg overflow-x-auto text-base m-0 font-mono whitespace-pre">
               <code>{formattedCode}</code>
             </pre>
           </div>
